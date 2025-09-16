@@ -5,9 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-response = requests.get(os.environ.get('BUILT_IN_JOBSITE'))
-html_text = response.text
-built_in_jobsite_soup = BeautifulSoup(html_text, "html.parser")
+html_response = requests.get(os.environ.get('BUILT_IN_JOBSITE')).text
+built_in_jobsite_soup = BeautifulSoup(html_response, "html.parser")
 
 for job_card in built_in_jobsite_soup.find_all(name='a', class_="card-alias-after-overlay"):
     #Only parse if the returned value is headed with /job/ as others are returned in card such as /company/
