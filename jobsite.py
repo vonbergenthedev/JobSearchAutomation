@@ -14,6 +14,9 @@ class JobSite:
     def get_listings(self):
         return self.listings
 
+    def set_listing(self, listing):
+        self.listings.append(listing)
+
     def get_exclusions(self):
         return self.exclusions_list
 

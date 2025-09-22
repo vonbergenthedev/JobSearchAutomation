@@ -31,7 +31,7 @@ class BIJ:
                 # only parse if the returned value is headed with /job/ as others are returned in card such as /company/
                 if '/job/' in job_card.get('href'):
                     job_card = JobCard(job_card.text, 'https://builtin.com' + job_card.get('href'))
-                    self.jobsite.get_listings().append(job_card)
+                    self.jobsite.set_listing(job_card)
                     # test print to check jobcard object creation
                     # print(f'\nCreated Job Card Object:')
                     # print(f'Object Title: {job_card.get_job_title()}')
