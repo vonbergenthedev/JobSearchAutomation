@@ -1,7 +1,6 @@
 class JobCard:
 
     def __init__(self, job_title, url):
-
         self.job_title = job_title
         self.url = url
 
