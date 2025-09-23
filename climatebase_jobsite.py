@@ -13,4 +13,7 @@ class CBJ:
         return self.jobsite.get_listings()
 
     def parse_job_listings(self):
-        pass
+        print('Parsing job listings')
+        print(f'{self.jobsite.get_soup().find('a').prettify()}')
+
+
