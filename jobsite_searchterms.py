@@ -1,4 +1,3 @@
-from climatebase_jobsite import CBJ
 
 search_dict = {
 
