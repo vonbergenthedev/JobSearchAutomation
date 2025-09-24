@@ -5,24 +5,16 @@ from bs4 import BeautifulSoup
 
 class JobSite:
 
-    def __init__(self, url, exclusions_list):
+    def __init__(self, url, exclusions_list, search_params=None):
         self.url = url
-        self.html_response = requests.get(self.url)
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0'
+        }
+
+        self.html_response = requests.get(self.url, headers=self.headers, params=search_params)
         # test print for response code
         # print(self.html_response.status_code)
-
-        # sometimes the python requests get is caught by a security feature to try and combat bot usage
-        # if alternate code is detected, attempt alternative request structure using urllib request
-        if self.html_response.status_code != 200:
-            if self.html_response.status_code == 403:
-                print('Initial Request Failed [403 Forbidden], trying alternate request...')
-                alt_request = Request(
-                    url=self.url,
-                    headers={'User-Agent': 'Mozilla/5.0'}
-                )
-                self.html_response = urlopen(alt_request).read()
-        else:
-            self.html_response = self.html_response.text
+        self.html_response = self.html_response.text
 
         self.jobsite_soup = BeautifulSoup(self.html_response, 'html.parser')
         # test print to ensure that the response was converted successfully
