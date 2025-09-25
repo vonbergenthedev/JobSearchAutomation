@@ -1,4 +1,3 @@
-
 search_dict = {
 
     'builtin': {
@@ -23,6 +22,10 @@ search_dict = {
             'job_types': 'Full+time+role',
 
         },
+    },
+
+    'workingnomads': {
+        'params': {}
     },
 
 }
