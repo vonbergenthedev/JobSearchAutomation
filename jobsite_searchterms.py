@@ -15,17 +15,23 @@ search_dict = {
 
     'climatebase': {
         'params': {
-            'categories': 'Software+%26+IT%3ABack-end+Engineering%2CFull-stack+Engineering%7CSoftware+%26+IT%3ABack-end+Engineering%2CFull-stack+Engineering',
+            # 'categories': 'Software+%26+IT%3ABack-end+Engineering%2CFull-stack+Engineering%7CSoftware+%26+IT%3ABack-end+Engineering%2CFull-stack+Engineering',
             # 'date': 'last7',
-            'remote_preferences': 'Remote',
-            'remote': 'true',
-            'job_types': 'Full+time+role',
-
+            # 'remote_preferences': 'Remote',
+            # 'remote': 'true',
+            # 'job_types': 'Full+time+role',
         },
     },
 
     'workingnomads': {
-        'params': {}
+        'params': {
+            # 'location': 'north-america',
+            # 'category': 'development',
+            # 'positionType': 'full-time',
+            # 'salary': '150000',
+            # 'postedDate': '7',
+            # 'tag': 'software-engineering',
+        }
     },
 
 }
