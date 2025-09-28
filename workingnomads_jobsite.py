@@ -18,25 +18,19 @@ class WNJ:
         options.add_argument("--headless")
         driver = webdriver.Firefox(options=options)
         driver.get(self.jobsite.url)
-        message = driver.find_element(by=By.ID, value='jobs')
-        text = message.get_attribute('innerHTML')
+
+        jobs_id_element = driver.find_element(by=By.ID, value='jobs')
+        text = jobs_id_element.get_attribute('innerHTML')
+
         driver.close()
 
         souped_text = BeautifulSoup(text, 'html.parser')
 
-        # print(souped_text.prettify())
-
         for entry in souped_text.find_all(name='div', class_='job-desktop'):
-            # print(entry.prettify())
             temp_card = entry.find(name='a', class_='open-button ng-binding')
             card_excluded = False
 
             if temp_card:
-                # print(temp_card.prettify())
-                # print(temp_card.text.strip())
-                # print(entry.get('id'))
-                # print(temp_card.get('href'))
-
                 for exclusion in self.jobsite.get_exclusions():
                     if exclusion in temp_card.text.strip().lower():
                         card_excluded = True

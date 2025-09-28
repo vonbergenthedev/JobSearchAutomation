@@ -3,7 +3,7 @@ search_dict = {
     'builtin': {
         'params': {
             # 'daysSinceUpdated': '7',
-            # Currently, these terms make it too strict to return entries
+            ## Currently, below terms make it too strict to return entries
             # 'city': 'Billings',+
             # 'state': 'Montana',
             # 'country': 'USA',
@@ -33,5 +33,18 @@ search_dict = {
             # 'tag': 'software-engineering',
         }
     },
-
+    'techjobsforgood': {
+        'params': {
+        #     'job_function': 'Software+Engineering',
+        #     'locations': 'remote',
+        #     'q': 'js',
+            ## This level will need additional logic as the call is &seniority=... with the index being the required level
+            ## and each respective query added together, as such: '&seniority=Mid+Level&seniority=Senior'
+        #     'seniority': {
+        #         0: 'Mid+Level',
+        #         1: 'Senior'
+        #     },
+        #     'remote_jobs': 'on',
+        }
+    }
 }

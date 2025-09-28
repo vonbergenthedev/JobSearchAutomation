@@ -31,7 +31,8 @@ for listing in climatebase_jobsite_listings.get_listings():
     print(listing.get_url())
 
 ## WORKING NOMADS JOBSITE
-workingnomads_jobsite = JobSite(os.environ.get('WORKING_NOMADS_JOBSITE'), exclusions_jobtitle_list, search_dict['workingnomads']['params'])
+workingnomads_jobsite = JobSite(os.environ.get('WORKING_NOMADS_JOBSITE'), exclusions_jobtitle_list,
+                                search_dict['workingnomads']['params'])
 workingnomads_jobsite_listings = WNJ(workingnomads_jobsite)
 
 print(f'\n!!**Working Nomads Job Listings**!!')
@@ -40,3 +41,11 @@ for listing in workingnomads_jobsite_listings.get_listings():
     print(listing.get_url())
 
 ## TECH JOBS FOR GOOD JOBSITE
+techjobsforgood_jobsite = JobSite(os.environ.get('TECH_JOBS_FOR_GOOD_JOBSITE'), exclusions_jobtitle_list,
+                                  search_dict['techjobsforgood']['params'])
+techjobsforgood_jobsite_listings = TJFG(techjobsforgood_jobsite)
+
+print(f'\n!!**Tech Jobs for Good Job Listings**!!')
+for listing in techjobsforgood_jobsite_listings.get_listings():
+    print(listing.get_job_title())
+    print(listing.get_url())
