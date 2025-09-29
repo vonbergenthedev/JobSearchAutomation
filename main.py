@@ -8,6 +8,10 @@ from climatebase_jobsite import CBJ
 from workingnomads_jobsite import WNJ
 from techjobsforgood_jobsite import TJFG
 
+## TODO Put jobsite_id logic into each jobsite website specific class
+## TODO Update climatebase_jobsite.py to use Selenium so that the returned results are accurate
+## TODO Create Dictionary/JSON export
+
 load_dotenv()
 
 ## BUILT IN JOBSITE
@@ -19,6 +23,8 @@ print(f'\n!!**Builtin Job Listings**!!')
 for listing in builtin_jobsite_listings.get_listings():
     print(listing.get_job_title())
     print(listing.get_url())
+    print(f'Job ID: {listing.get_job_id()}')
+    # print('\n')
 
 ## CLIMATE BASE JOBSITE
 climatebase_jobsite = JobSite(os.environ.get('CLIMATE_BASE_JOBSITE'), exclusions_jobtitle_list,
@@ -39,6 +45,7 @@ print(f'\n!!**Working Nomads Job Listings**!!')
 for listing in workingnomads_jobsite_listings.get_listings():
     print(listing.get_job_title())
     print(listing.get_url())
+    print(f'Job ID: {listing.get_job_id()}')
 
 ## TECH JOBS FOR GOOD JOBSITE
 techjobsforgood_jobsite = JobSite(os.environ.get('TECH_JOBS_FOR_GOOD_JOBSITE'), exclusions_jobtitle_list,

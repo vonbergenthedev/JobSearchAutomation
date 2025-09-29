@@ -14,8 +14,9 @@ class BIJ:
         # gather job cards from job search
         for entry in self.jobsite.get_soup().find_all(name='a', class_="card-alias-after-overlay"):
             # test print to view current job card being filtered
-            # print(f'\nChecking current job title: {entry.text}')
+            # print(f'\nChecking current job title: {entry}')
             # print(entry.get('href'))
+            # print(entry.get('data-builtin-track-job-id'))
             card_excluded = False
             # check if the card title contains a word from the title exclusion bank "remove" if so
             for exclusion in self.jobsite.get_exclusions():
@@ -30,5 +31,6 @@ class BIJ:
             if not card_excluded:
                 # only parse if the returned value is headed with /job/ as others are returned in card such as /company/
                 if '/job/' in entry.get('href'):
-                    job_card = JobCard(entry.text, 'https://builtin.com' + entry.get('href'))
+                    job_card = JobCard(entry.text, 'https://builtin.com' + entry.get('href'),
+                                       entry.get('data-builtin-track-job-id'))
                     self.jobsite.set_listing(job_card)

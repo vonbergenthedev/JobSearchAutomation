@@ -43,5 +43,17 @@ class WNJ:
 
             # check if the exclusion tag has been set for job card
             if not card_excluded:
-                job_card = JobCard(temp_card.text.strip(), 'https://www.workingnomads.com' + temp_card.get('href'))
-                self.jobsite.set_listing(job_card)
+                job_id = temp_card.get('href').rsplit('-', 1)[1]
+
+                try:
+                    int(job_id)
+
+                except ValueError:
+                    # print(f'{job_id} is not an integer')
+                    job_card = JobCard(temp_card.text.strip(), 'https://www.workingnomads.com' + temp_card.get('href'))
+                    self.jobsite.set_listing(job_card)
+
+                else:
+                    job_card = JobCard(temp_card.text.strip(), 'https://www.workingnomads.com' + temp_card.get('href'),
+                                       job_id)
+                    self.jobsite.set_listing(job_card)
