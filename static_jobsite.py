@@ -1,9 +1,8 @@
 import requests
-from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
-class JobSite:
+class StaticJobSite:
 
     def __init__(self, url, exclusions_list, search_params=None):
         self.url = url
@@ -12,12 +11,12 @@ class JobSite:
         }
 
         self.html_response = requests.get(self.url, headers=self.headers, params=search_params)
-        # test print for response code
+        ## Test print for response code
         # print(self.html_response.status_code)
         self.html_response = self.html_response.text
 
         self.jobsite_soup = BeautifulSoup(self.html_response, 'html.parser')
-        # test print to ensure that the response was converted successfully
+        ## Test print to ensure that the response was converted successfully
         # print(self.jobsite_soup.prettify())
         self.exclusions_list = exclusions_list
         self.listings = []

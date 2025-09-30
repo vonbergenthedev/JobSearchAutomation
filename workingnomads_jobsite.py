@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from jobcard import JobCard
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
@@ -14,17 +13,10 @@ class WNJ:
         return self.jobsite.get_listings()
 
     def parse_job_listings(self):
-        options = webdriver.FirefoxOptions()
-        options.add_argument("--headless")
-        driver = webdriver.Firefox(options=options)
-        driver.get(self.jobsite.url)
-
-        jobs_id_element = driver.find_element(by=By.ID, value='jobs')
-        text = jobs_id_element.get_attribute('innerHTML')
-
-        driver.close()
-
-        souped_text = BeautifulSoup(text, 'html.parser')
+        jobsite_driver = self.jobsite.get_jobsite_driver()
+        script_data = jobsite_driver.find_element(by=By.ID, value='jobs')
+        souped_text = BeautifulSoup(script_data.get_attribute('innerHTML'), 'html.parser')
+        jobsite_driver.close()
 
         for entry in souped_text.find_all(name='div', class_='job-desktop'):
             temp_card = entry.find(name='a', class_='open-button ng-binding')
@@ -34,22 +26,22 @@ class WNJ:
                 for exclusion in self.jobsite.get_exclusions():
                     if exclusion in temp_card.text.strip().lower():
                         card_excluded = True
-                        # test print to view exclusions
+                        ## Test print to view exclusions
                         # print(f'\nExclusion found!!!: *{exclusion}*')
                         # print(f'{temp_card.text.strip()}')
                         break
             else:
                 card_excluded = True
 
-            # check if the exclusion tag has been set for job card
+            ## Check if the exclusion tag has been set for job card
             if not card_excluded:
                 job_id = temp_card.get('href').rsplit('-', 1)[1]
 
                 try:
                     int(job_id)
 
+                ## job_id is a word, the site does not use an int for the tail end of the url
                 except ValueError:
-                    # print(f'{job_id} is not an integer')
                     job_card = JobCard(temp_card.text.strip(), 'https://www.workingnomads.com' + temp_card.get('href'))
                     self.jobsite.set_listing(job_card)
 
