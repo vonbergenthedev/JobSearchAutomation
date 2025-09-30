@@ -34,3 +34,6 @@ class BIJ:
                     job_card = JobCard(temp_card.text, 'https://builtin.com' + temp_card.get('href'),
                                        temp_card.get('data-builtin-track-job-id'))
                     self.jobsite.set_listing(job_card)
+
+    def print_jobcard_listings(self):
+        self.jobsite.print_listings()

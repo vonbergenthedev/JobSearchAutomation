@@ -24,3 +24,9 @@ class DynamicJobSite:
 
     def get_exclusions(self):
         return self.exclusions_list
+
+    def print_listings(self):
+        for listing in self.listings:
+            print(listing.get_job_title())
+            print(listing.get_url())
+            print(f'Job ID: {listing.get_job_id()}\n')

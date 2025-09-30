@@ -9,13 +9,7 @@ from climatebase_jobsite import CBJ
 from workingnomads_jobsite import WNJ
 from techjobsforgood_jobsite import TJFG
 
-
 ## TODO Create Dictionary/JSON export
-## TODO Create print_listings()
-
-def print_listings():
-    pass
-
 
 load_dotenv()
 
@@ -25,11 +19,7 @@ builtin_jobsite = StaticJobSite(os.environ.get('BUILT_IN_JOBSITE'), exclusions_j
 builtin_jobsite_listings = BIJ(builtin_jobsite)
 
 print(f'\n!!**Builtin Job Listings**!!')
-for listing in builtin_jobsite_listings.get_listings():
-    print(listing.get_job_title())
-    print(listing.get_url())
-    print(f'Job ID: {listing.get_job_id()}\n')
-    # print('\n')
+builtin_jobsite_listings.print_jobcard_listings()
 
 ## CLIMATE BASE JOBSITE - Dynamic
 climatebase_jobsite = DynamicJobSite(os.environ.get('CLIMATE_BASE_JOBSITE'), exclusions_jobtitle_list,
@@ -37,10 +27,7 @@ climatebase_jobsite = DynamicJobSite(os.environ.get('CLIMATE_BASE_JOBSITE'), exc
 climatebase_jobsite_listings = CBJ(climatebase_jobsite)
 
 print(f'\n!!**Climate Base Job Listings**!!')
-for listing in climatebase_jobsite_listings.get_listings():
-    print(listing.get_job_title())
-    print(listing.get_url())
-    print(f'Job ID: {listing.get_job_id()}\n')
+climatebase_jobsite_listings.print_jobcard_listings()
 
 ## WORKING NOMADS JOBSITE - Dynamic
 workingnomads_jobsite = DynamicJobSite(os.environ.get('WORKING_NOMADS_JOBSITE'), exclusions_jobtitle_list,
@@ -48,10 +35,7 @@ workingnomads_jobsite = DynamicJobSite(os.environ.get('WORKING_NOMADS_JOBSITE'),
 workingnomads_jobsite_listings = WNJ(workingnomads_jobsite)
 
 print(f'\n!!**Working Nomads Job Listings**!!')
-for listing in workingnomads_jobsite_listings.get_listings():
-    print(listing.get_job_title())
-    print(listing.get_url())
-    print(f'Job ID: {listing.get_job_id()}\n')
+workingnomads_jobsite_listings.print_jobcard_listings()
 
 ## TECH JOBS FOR GOOD JOBSITE - Static
 techjobsforgood_jobsite = StaticJobSite(os.environ.get('TECH_JOBS_FOR_GOOD_JOBSITE'), exclusions_jobtitle_list,
@@ -59,7 +43,4 @@ techjobsforgood_jobsite = StaticJobSite(os.environ.get('TECH_JOBS_FOR_GOOD_JOBSI
 techjobsforgood_jobsite_listings = TJFG(techjobsforgood_jobsite)
 
 print(f'\n!!**Tech Jobs for Good Job Listings**!!')
-for listing in techjobsforgood_jobsite_listings.get_listings():
-    print(listing.get_job_title())
-    print(listing.get_url())
-    print(f'Job ID: {listing.get_job_id()}\n')
+techjobsforgood_jobsite_listings.print_jobcard_listings()

@@ -49,3 +49,6 @@ class WNJ:
                     job_card = JobCard(temp_card.text.strip(), 'https://www.workingnomads.com' + temp_card.get('href'),
                                        job_id)
                     self.jobsite.set_listing(job_card)
+
+    def print_jobcard_listings(self):
+        self.jobsite.print_listings()

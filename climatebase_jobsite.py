@@ -46,3 +46,6 @@ class CBJ:
                     job_id = temp_card.get('href').rsplit('/', 2)[1]
                     job_card = JobCard(temp_card_title.text, temp_card.get('href'), job_id)
                     self.jobsite.set_listing(job_card)
+
+    def print_jobcard_listings(self):
+        self.jobsite.print_listings()

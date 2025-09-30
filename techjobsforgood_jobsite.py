@@ -28,3 +28,6 @@ class TJFG:
                                    'https://techjobsforgood.com' + temp_card.a.get('href'),
                                    temp_card.a.get('href').rsplit('/', 2)[1])
                 self.jobsite.set_listing(job_card)
+
+    def print_jobcard_listings(self):
+        self.jobsite.print_listings()
