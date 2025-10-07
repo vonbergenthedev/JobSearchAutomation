@@ -27,6 +27,6 @@ class DynamicJobSite:
 
     def print_listings(self):
         for listing in self.listings:
-            print(listing.get_job_title())
-            print(listing.get_url())
+            print(f'Job Title: {listing.get_job_title()}')
+            print(f'Job URL: {listing.get_url()}')
             print(f'Job ID: {listing.get_job_id()}\n')

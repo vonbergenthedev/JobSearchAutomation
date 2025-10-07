@@ -11,7 +11,7 @@ class TJFG:
         return self.jobsite.get_listings()
 
     def parse_job_listings(self):
-        for temp_card in self.jobsite.get_soup().find_all(name='div', class_='ui centered card'):
+        for temp_card in self.jobsite.get_jobsite_soup().find_all(name='div', class_='ui centered card'):
             temp_card_title = temp_card.div.get('title')
             card_excluded = False
 

@@ -35,16 +35,16 @@ search_dict = {
     },
     'techjobsforgood': {
         'params': {
-        #     'job_function': 'Software+Engineering',
-        #     'locations': 'remote',
-        #     'q': 'js',
+            #     'job_function': 'Software+Engineering',
+            #     'locations': 'remote',
+            #     'q': 'js',
             ## This level will need additional logic as the call is &seniority=... with the index being the required level
             ## and each respective query added together, as such: '&seniority=Mid+Level&seniority=Senior'
-        #     'seniority': {
-        #         0: 'Mid+Level',
-        #         1: 'Senior'
-        #     },
-        #     'remote_jobs': 'on',
+            #     'seniority': {
+            #         0: 'Mid+Level',
+            #         1: 'Senior'
+            #     },
+            #     'remote_jobs': 'on',
         }
     }
 }

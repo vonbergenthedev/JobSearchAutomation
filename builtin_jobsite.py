@@ -12,7 +12,7 @@ class BIJ:
 
     def parse_job_listings(self):
         ## Gather job cards from job search
-        for temp_card in self.jobsite.get_soup().find_all(name='a', class_="card-alias-after-overlay"):
+        for temp_card in self.jobsite.get_jobsite_soup().find_all(name='a', class_="card-alias-after-overlay"):
             ## Test print to view current job card being filtered
             # print(f'\nChecking current job title: {entry}')
             # print(entry.get('href'))
