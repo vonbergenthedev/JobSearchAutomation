@@ -10,19 +10,40 @@ from climatebase_jobsite import CBJ
 from workingnomads_jobsite import WNJ
 from techjobsforgood_jobsite import TJFG
 
-site_export = {
-    'builtin': {},  # builtin_jobsite_listings,
-    'climatebase': {},  # climatebase_jobsite_listings,
-    'workingnomads': {},  # workingnomads_jobsite_listings,
-    'techjobsforgood': {},  # techjobsforgood_jobsite_listings,
-}
+## TODO Add additional sites
+## TODO Add additional user
+
+def export_json(jobsite_listings):
+    site_export = {}
+    site_counter = 0
+
+    for listing in jobsite_listings:
+        jobcard_counter = 0
+        site_export.update({site_counter: {}})
+
+        for jobcard in listing.get_listings():
+            site_export[site_counter][jobcard_counter] = {
+                'job_title': jobcard.get_job_title(),
+                'job_url': jobcard.get_url(),
+                'job_id': jobcard.get_job_id()
+            }
+
+            jobcard_counter += 1
+
+        site_counter += 1
+
+    return site_export
+
 
 load_dotenv()
+
+sites_jobsite_listings = []
 
 ## BUILT IN JOBSITE - Static
 builtin_jobsite = Jobsite(os.environ.get('BUILT_IN_JOBSITE'), exclusions_list=exclusions_jobtitle_list,
                           search_params=search_dict['builtin']['params'], site_type='static')
 builtin_jobsite_listings = BIJ(builtin_jobsite)
+sites_jobsite_listings.append(builtin_jobsite_listings)
 
 # print(f'\n!!**Builtin Job Listings**!!')
 # builtin_jobsite_listings.print_jobcard_listings()
@@ -31,6 +52,7 @@ builtin_jobsite_listings = BIJ(builtin_jobsite)
 climatebase_jobsite = Jobsite(os.environ.get('CLIMATE_BASE_JOBSITE'), exclusions_list=exclusions_jobtitle_list,
                               search_params=search_dict['climatebase']['params'], site_type='dynamic')
 climatebase_jobsite_listings = CBJ(climatebase_jobsite)
+sites_jobsite_listings.append(climatebase_jobsite_listings)
 
 # print(f'\n!!**Climate Base Job Listings**!!')
 # climatebase_jobsite_listings.print_jobcard_listings()
@@ -39,6 +61,7 @@ climatebase_jobsite_listings = CBJ(climatebase_jobsite)
 workingnomads_jobsite = Jobsite(os.environ.get('WORKING_NOMADS_JOBSITE'), exclusions_list=exclusions_jobtitle_list,
                                 search_params=search_dict['workingnomads']['params'], site_type='dynamic')
 workingnomads_jobsite_listings = WNJ(workingnomads_jobsite)
+sites_jobsite_listings.append(workingnomads_jobsite_listings)
 
 # print(f'\n!!**Working Nomads Job Listings**!!')
 # workingnomads_jobsite_listings.print_jobcard_listings()
@@ -48,45 +71,18 @@ techjobsforgood_jobsite = Jobsite(os.environ.get('TECH_JOBS_FOR_GOOD_JOBSITE'),
                                   exclusions_list=exclusions_jobtitle_list,
                                   search_params=search_dict['techjobsforgood']['params'], site_type='static')
 techjobsforgood_jobsite_listings = TJFG(techjobsforgood_jobsite)
+sites_jobsite_listings.append(techjobsforgood_jobsite_listings)
 
 # print(f'\n!!**Tech Jobs for Good Job Listings**!!')
 # techjobsforgood_jobsite_listings.print_jobcard_listings()
 
-
-## TODO Create function to compress this down, pass in list of listings instead and iterate over.
-temp_list = []
-counter = 0
-for jobcard in builtin_jobsite_listings.get_listings():
-    site_export['builtin'][counter] = {'job_title': jobcard.get_job_title(), 'job_url': jobcard.get_url(),
-                                       'job_id': jobcard.get_job_id()}
-    counter += 1
-
-counter = 0
-for jobcard in climatebase_jobsite_listings.get_listings():
-    site_export['climatebase'][counter] = {'job_title': jobcard.get_job_title(), 'job_url': jobcard.get_url(),
-                                           'job_id': jobcard.get_job_id()}
-    counter += 1
-
-counter = 0
-for jobcard in workingnomads_jobsite_listings.get_listings():
-    site_export['workingnomads'][counter] = {'job_title': jobcard.get_job_title(), 'job_url': jobcard.get_url(),
-                                             'job_id': jobcard.get_job_id()}
-    counter += 1
-
-counter = 0
-for jobcard in techjobsforgood_jobsite_listings.get_listings():
-    site_export['techjobsforgood'][counter] = {'job_title': jobcard.get_job_title(), 'job_url': jobcard.get_url(),
-                                               'job_id': jobcard.get_job_id()}
-    counter += 1
-
-##
 # TESTING JSON Response
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    payload = site_export
+    payload = export_json(sites_jobsite_listings)
     response = Response(json.dumps(payload), status=200, mimetype='application/json')
 
     return response
@@ -95,6 +91,3 @@ def index():
 if __name__ == '__main__':
     app.run()
 ##
-
-# print("Initial Export")
-# print(site_export)
