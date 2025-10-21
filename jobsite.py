@@ -49,6 +49,6 @@ class Jobsite:
 
     def print_listings(self):
         for listing in self.listings:
-            print(f'Job Title: {listing.get_job_title()}')
-            print(f'Job URL: {listing.get_url()}')
-            print(f'Job ID: {listing.get_job_id()}\n')
+            print(f"Job Title: {listing.get_job_title()}")
+            print(f"Job URL: {listing.get_url()}")
+            print(f"Job ID: {listing.get_job_id()}\n")

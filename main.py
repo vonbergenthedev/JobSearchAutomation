@@ -23,9 +23,9 @@ def export_json(jobsite_listings):
 
         for jobcard in listing.get_listings():
             site_export[site_counter][jobcard_counter] = {
-                'job_title': jobcard.get_job_title(),
-                'job_url': jobcard.get_url(),
-                'job_id': jobcard.get_job_id()
+                "job_title": jobcard.get_job_title(),
+                "job_url": jobcard.get_url(),
+                "job_id": jobcard.get_job_id()
             }
 
             jobcard_counter += 1
@@ -77,17 +77,20 @@ sites_jobsite_listings.append(techjobsforgood_jobsite_listings)
 # techjobsforgood_jobsite_listings.print_jobcard_listings()
 
 # TESTING JSON Response
-app = Flask(__name__)
+payload = export_json(sites_jobsite_listings)
+json_dump = json.dumps(payload)
+print(json_dump)
 
-
-@app.route('/')
-def index():
-    payload = export_json(sites_jobsite_listings)
-    response = Response(json.dumps(payload), status=200, mimetype='application/json')
-
-    return response
-
-
-if __name__ == '__main__':
-    app.run()
+# app = Flask(__name__)
+#
+#
+# @app.route('/')
+# def index():
+#     response = Response(json.dumps(payload), status=200, mimetype='application/json')
+#
+#     return response
+#
+#
+# if __name__ == '__main__':
+#     app.run()
 ##
